@@ -37,4 +37,20 @@ async def user(id:int):
     users = filter(lambda user: user.id == id, users_list)
     return list(users)[0] @app.get("/user/{id}")
 async def user(id:int):
-    return users_list    
+    return users_list   
+
+@app.get("/user/")
+async def user(id:int):
+    return search_user(id)
+    
+    # iniciar navegador con:  http://127.0.0.1:8000/userquery/?id=1
+    
+
+def search_user(id: int):
+    users = filter(lambda user: user.id == id, users_list)
+    try:
+        return list(users)[0]  
+    except:
+        return {"error":"No se ha encontrado el usuario"}
+    
+    # iniciar navegador con:  http://127.0.0.1:8000/userquery/?id=1 
