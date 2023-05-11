@@ -61,7 +61,13 @@ async def user(id:int):
    
     # iniciar navegador con:  http://127.0.0.1:8000/username/?name=roberto   
 
-
+@app.post("/user/")
+async def user(user: User):
+    if type(search_user(user.id))==User:
+        return {"error":"El usuario ya existe"}
+    else:
+        users_list.append(user)
+    
 def search_user(id: int):
     users = filter(lambda user: user.id == id, users_list)
     try:
